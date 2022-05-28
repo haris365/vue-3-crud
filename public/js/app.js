@@ -5862,6 +5862,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5895,7 +5897,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/post/show/".concat(this.$route.params.id)).then(function (response) {
-        console.log(response.data.post.comments.length);
+        console.log(response.data.user);
         _this.likeLenght = response.data.post.likes.length;
         _this.likes_count = response.data.likes_count;
         _this.post = response.data.post;
@@ -5943,6 +5945,7 @@ __webpack_require__.r(__webpack_exports__);
       this.reply = event.target.value;
     },
     like: function like(post_id) {
+      // this.likes_count = this.likes_count+1
       axios.post("/post/".concat(this.$route.params.id, "/like")).then(function (response) {})["catch"](function (error) {
         console.error(error);
       });
@@ -5955,9 +5958,6 @@ __webpack_require__.r(__webpack_exports__);
       this.index = (this.index + 1) % this.images.length;
     },
     toggleReply: function toggleReply(key) {
-      //     $(this).attr("class","newclass");
-      //    const myElement = $("#reply"+key).addClass("important blue");;
-      //    console.log('myElement',myElement)
       $('#reply' + key).toggle();
     }
   }
@@ -30067,6 +30067,7 @@ var render = function () {
                             attrs: {
                               type: "text",
                               placeholder: "Please leave a comment",
+                              required: "",
                             },
                             domProps: { value: _vm.post.comment },
                             on: {

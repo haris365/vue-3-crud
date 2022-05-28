@@ -79,10 +79,11 @@
                                             alt="image.alt"
                                         />
 
-                                        <!-- <img v-for="like in post.likes" v-if="likeLenght > 0 && auth.id === like.user.id" :src="'http://vue-3.test/images/clike.png'" width="20px" height="20px" style="margin-top:-7px;margin-right:2px"> -->
+                                        <!-- <img v-for="like in post.likes" v-if="auth.id === like.user.id" :key="image.id"  :src="image.src" width="20px" height="20px" style="margin-top:-7px;margin-right:2px"> -->
 
                                         <a
                                             @click="like(post.id)"
+                                           
                                             style="
                                                 color: inherit;
                                                 text-decoration: none;
@@ -132,6 +133,7 @@
                                         class="form-control"
                                         v-model="post.comment"
                                         placeholder="Please leave a comment"
+                                        required
                                     /><br />
                                     <button
                                         class="btn btn-success btn-lg btn-block"
@@ -263,7 +265,8 @@ export default {
             axios
                 .get(`/post/show/${this.$route.params.id}`)
                 .then((response) => {
-                    console.log(response.data.post.comments.length);
+                    console.log(response.data.user);
+
                     this.likeLenght = response.data.post.likes.length;
                     this.likes_count = response.data.likes_count;
                     this.post = response.data.post;
@@ -276,6 +279,7 @@ export default {
                 });
         },
         addComment() {
+          
             let data = {
                 comment: this.post.comment,
                 post_id: this.$route.params.id,
@@ -314,6 +318,8 @@ export default {
             this.reply = event.target.value;
         },
         like(post_id) {
+            // this.likes_count = this.likes_count+1
+
             axios
                 .post(`/post/${this.$route.params.id}/like`)
                 .then((response) => {})
@@ -325,17 +331,12 @@ export default {
             alert("Share Functionality Comming Soon");
         },
         switchImage() {
+           
             this.image = this.images[this.index];
             this.index = (this.index + 1) % this.images.length;
         },
         toggleReply(key)
         {
-            
-        //     $(this).attr("class","newclass");
-
-        //    const myElement = $("#reply"+key).addClass("important blue");;
-        //    console.log('myElement',myElement)
-
            $('#reply'+key).toggle();
         }
     },
