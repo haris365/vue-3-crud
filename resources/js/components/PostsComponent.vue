@@ -85,9 +85,7 @@ export default {
                     })
                     .catch(function (error) {
                         console.error(error);
-                    });
-
-                    
+                    });                    
             }                                       
         }
     },
