@@ -5,13 +5,13 @@
                 <div class="card">
                     <div class="card-header">
 
-                      <span>Post Create</span>                    
+                      <span>Post Create</span>
                     </div>
-                  
+
                     <div class="card-body">
                        <div class="container">
-                           
-                         
+
+
                          <form @submit.prevent="addPost">
                             <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Post Name</label>
@@ -40,11 +40,11 @@
                             <div class="large-12 medium-12 small-12 cell">
                                 <div v-for="(file, key) in files" class="file-listing">{{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">Remove</span></div>
                             </div>
-                           
-                           
+
+
                             <button type="submit" class="btn btn-primary">Submit</button>
                           </form>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -57,36 +57,36 @@
 <script>
 
 
-    
+
     export default {
         data() {
             return {
-                post: {},                
+                post: {},
                 tags:[],
                 selected:[],
                 files: [],
                 name:'',
-                
+
             }
         },
-        mounted() 
+        mounted()
         {
-       
+
            axios.get('/tags')
                 .then(response => {
-                   
+                    name
                     this.tags = response.data;
                 })
                 .catch(function (error) {
                     console.error(error);
                 });
-        
+
         },
-        
+
         methods: {
-          
+
             addPost() {
-                
+
                 let formData = new FormData();
                 formData.append('name', this.name);
 
@@ -107,17 +107,17 @@
                 }
               })
                     .then(response => {
-                       
+
                         this.$router.push('/posts')
                     }
                     )
                     .catch(function (error) {
                         console.error("error",error);
-                       
+
                     });
-            
+
             },
-             
+
             handleFilesUpload(){
                 let uploadedFiles =this.$refs.files.files;
 
@@ -127,7 +127,7 @@
             },removeFile( key ){
                 this.files.splice( key, 1 );
             }
-            
+
 
         }
     }

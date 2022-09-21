@@ -14,6 +14,7 @@
                     <div class="card-body">
                        <div class="container">
                         <div class="card float-start mr-2" style="width: 18rem;">
+                     
                         <router-link class="px-2" to="/create">
                          <img src="{{url(config('APP_URL').'images/post.png')}}" class="card-img-top" alt="..."></router-link>
                            
